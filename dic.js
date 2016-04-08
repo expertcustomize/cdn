@@ -94,3 +94,33 @@
 		}
 	};
 })(jQuery);
+function showMessage(html) {
+$('#ajaxmeaning').html(html+"<input type='button' id='hideshow' onclick='$(\"#ajaxmeaning\").animate( { bottom:\"-500\" } , 500);' value='X'>");
+          $('#ajaxmeaning').animate( { bottom:"0" } , 500);
+
+}
+
+$(function() {
+
+$('a.word').getWordByEvent('mousemove', function(event, xword) {
+
+$.ajax({
+    url: websiteurl+'dic.php',
+	 cache: true,
+    jsonp: "callback",
+	jsonpCallback: "callback",
+    dataType: "jsonp",
+data: { q : xword },
+ 
+    // Work with the response
+    success: function( response ) {
+	showMessage(response[0]);
+
+    }
+});
+
+
+});
+
+var oTextbox = new AutoSuggestControl("key");
+});
